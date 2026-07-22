@@ -9,11 +9,14 @@ ARG PG_MAJOR=18
 FROM postgres:${PG_MAJOR}
 
 # pgBackRest aus Debian/pgdg (das offizielle Image bringt den pgdg-Apt-Repo mit).
+# ca-certificates ist Pflicht: pgBackRest verifiziert das TLS-Zert des S3-/R2-Endpoints
+# (betrifft archive-push UND backup); das Basis-Image hat kein CA-Bundle.
 RUN set -eux; \
     apt-get update; \
-    apt-get install -y --no-install-recommends pgbackrest; \
+    apt-get install -y --no-install-recommends ca-certificates pgbackrest; \
     rm -rf /var/lib/apt/lists/*; \
-    pgbackrest version
+    pgbackrest version; \
+    test -s /etc/ssl/certs/ca-certificates.crt
 
 # Config-/Log-Verzeichnisse (dem postgres-User gehörend). Repo-/Spool-Pfad
 # setzt die Laufzeit-Config bzw. ein Mount.
