@@ -25,7 +25,7 @@ Alles Betriebliche bleibt Dokploy-Config (nichts davon steckt im Image):
 
 Base-/Diff-Backups laufen als Host-Timer via `docker exec … pgbackrest backup`
 (gleiches Muster wie die bestehende Dump-Kette). Details/Runbook:
-[`hosting-platform`](https://github.com/Dropicx/hosting-platform) → `stacks/acme/solo/DB-KURZFRIST.md`.
+[`hosting-platform`](https://github.com/lit-services/hosting-platform) → `stacks/acme/solo/DB-KURZFRIST.md`.
 
 ## Tags
 - `18` — aktuelles Postgres 18 + pgBackRest (nutzen)
